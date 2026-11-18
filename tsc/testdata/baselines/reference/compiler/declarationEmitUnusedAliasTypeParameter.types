@@ -1,0 +1,64 @@
+//// [tests/cases/compiler/declarationEmitUnusedAliasTypeParameter.ts] ////
+
+=== types.ts ===
+export type Labeled<Label> = { id: number } & { name: string };
+>Labeled : Labeled<Label>
+>id : number
+>name : string
+
+export type MaybeLabel<Label> = undefined | "x";
+>MaybeLabel : MaybeLabel<Label>
+
+export type Branded<Label> = number & {};
+>Branded : Branded<Label>
+
+export type UsesSecond<Label, Value> = { id: number } & { value: Value };
+>UsesSecond : UsesSecond<Label, Value>
+>id : number
+>value : Value
+
+=== main.ts ===
+import type { Labeled, MaybeLabel, Branded, UsesSecond } from "./types";
+>Labeled : Labeled<Label>
+>MaybeLabel : MaybeLabel<Label>
+>Branded : Branded<Label>
+>UsesSecond : UsesSecond<Label, Value>
+
+declare function id<T>(value: T): T;
+>id : <T>(value: T) => T
+>value : T
+
+declare const item: Labeled<"user">;
+>item : Labeled<"user">
+
+declare const maybe: MaybeLabel<"user">;
+>maybe : MaybeLabel<"user">
+
+declare const branded: Branded<"user">;
+>branded : number
+
+declare const partly: UsesSecond<"user", 1>;
+>partly : UsesSecond<"user", 1>
+
+export const copy = item;
+>copy : Labeled<"user">
+>item : Labeled<"user">
+
+export const inferred = id(item);
+>inferred : Labeled<"user">
+>id(item) : Labeled<"user">
+>id : <T>(value: T) => T
+>item : Labeled<"user">
+
+export const maybeCopy = maybe;
+>maybeCopy : MaybeLabel<"user">
+>maybe : MaybeLabel<"user">
+
+export const brandedCopy = branded;
+>brandedCopy : number
+>branded : number
+
+export const partlyCopy = partly;
+>partlyCopy : UsesSecond<"user", 1>
+>partly : UsesSecond<"user", 1>
+
