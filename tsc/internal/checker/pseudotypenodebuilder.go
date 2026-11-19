@@ -76,6 +76,13 @@ func (b *NodeBuilderImpl) pseudoTypeToNode(t *pseudochecker.PseudoType) *ast.Nod
 		if ast.IsArrowFunction(node.Parent) && node.Parent.AsArrowFunction().Body == node {
 			return b.serializeReturnTypeForSignature(b.ch.getSignatureFromDeclaration(node.Parent), false)
 		}
+		if ast.IsPropertyAssignment(node.Parent) {
+			// The source literal's property symbol keeps the unwidened type: `c: r ? { a: 1 } : { k: true }`
+			// has `{ a: number } | { k: boolean }`, while the containing literal's widened type carries the
+			// normalized `{ a: number; k?: undefined } | { k: boolean; a?: undefined }`. Print the type that
+			// pseudoTypeEquivalentToType compared against (pseudoTypeToType widens), not the symbol's.
+			return b.serializeTypeForDeclaration(node.Parent, b.pseudoTypeToType(t), nil, false)
+		}
 		if ast.IsDeclaration(node.Parent) {
 			return b.serializeTypeForDeclaration(node.Parent, nil, nil, false)
 		}

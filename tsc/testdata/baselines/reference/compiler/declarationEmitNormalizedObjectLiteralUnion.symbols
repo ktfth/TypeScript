@@ -1,0 +1,53 @@
+//// [tests/cases/compiler/declarationEmitNormalizedObjectLiteralUnion.ts] ////
+
+=== declarationEmitNormalizedObjectLiteralUnion.ts ===
+export const settings = {
+>settings : Symbol(settings, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 0, 12))
+
+    mode: Math.random() > 0.5 ? { fast: true } : { retries: 3 },
+>mode : Symbol(mode, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 0, 25))
+>Math.random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>Math : Symbol(Math, Decl(lib.es5.d.ts, --, --), Decl(lib.es5.d.ts, --, --), Decl(lib.es2015.core.d.ts, --, --), Decl(lib.es2015.symbol.wellknown.d.ts, --, --), Decl(lib.es2025.float16.d.ts, --, --) ... and 1 more)
+>random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>fast : Symbol(fast, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 1, 33))
+>retries : Symbol(retries, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 1, 50))
+
+};
+
+export const nested = {
+>nested : Symbol(nested, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 4, 12))
+
+    outer: {
+>outer : Symbol(outer, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 4, 23))
+
+        inner: Math.random() > 0.5 ? { x: 1 } : Math.random() > 0.5 ? { y: "s" } : { z: null },
+>inner : Symbol(inner, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 5, 12))
+>Math.random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>Math : Symbol(Math, Decl(lib.es5.d.ts, --, --), Decl(lib.es5.d.ts, --, --), Decl(lib.es2015.core.d.ts, --, --), Decl(lib.es2015.symbol.wellknown.d.ts, --, --), Decl(lib.es2025.float16.d.ts, --, --) ... and 1 more)
+>random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>x : Symbol(x, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 6, 38))
+>Math.random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>Math : Symbol(Math, Decl(lib.es5.d.ts, --, --), Decl(lib.es5.d.ts, --, --), Decl(lib.es2015.core.d.ts, --, --), Decl(lib.es2015.symbol.wellknown.d.ts, --, --), Decl(lib.es2025.float16.d.ts, --, --) ... and 1 more)
+>random : Symbol(Math.random, Decl(lib.es5.d.ts, --, --))
+>y : Symbol(y, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 6, 71))
+>z : Symbol(z, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 6, 84))
+
+    },
+};
+
+export const list = [{ fast: true }, { retries: 3 }];
+>list : Symbol(list, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 10, 12))
+>fast : Symbol(fast, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 10, 22))
+>retries : Symbol(retries, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 10, 38))
+
+export function make(flag: boolean) {
+>make : Symbol(make, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 10, 53))
+>flag : Symbol(flag, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 12, 21))
+
+    return { mode: flag ? { fast: true } : { retries: 3 } };
+>mode : Symbol(mode, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 13, 12))
+>flag : Symbol(flag, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 12, 21))
+>fast : Symbol(fast, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 13, 27))
+>retries : Symbol(retries, Decl(declarationEmitNormalizedObjectLiteralUnion.ts, 13, 44))
+}
+

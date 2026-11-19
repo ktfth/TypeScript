@@ -1,0 +1,88 @@
+//// [tests/cases/compiler/declarationEmitNormalizedObjectLiteralUnion.ts] ////
+
+=== declarationEmitNormalizedObjectLiteralUnion.ts ===
+export const settings = {
+>settings : { mode: { fast: boolean; retries?: undefined; } | { fast?: undefined; retries: number; }; }
+>{    mode: Math.random() > 0.5 ? { fast: true } : { retries: 3 },} : { mode: { fast: boolean; } | { retries: number; }; }
+
+    mode: Math.random() > 0.5 ? { fast: true } : { retries: 3 },
+>mode : { fast: boolean; } | { retries: number; }
+>Math.random() > 0.5 ? { fast: true } : { retries: 3 } : { fast: boolean; } | { retries: number; }
+>Math.random() > 0.5 : boolean
+>Math.random() : number
+>Math.random : () => number
+>Math : Math
+>random : () => number
+>0.5 : 0.5
+>{ fast: true } : { fast: boolean; }
+>fast : boolean
+>true : true
+>{ retries: 3 } : { retries: number; }
+>retries : number
+>3 : 3
+
+};
+
+export const nested = {
+>nested : { outer: { inner: { x: number; y?: undefined; z?: undefined; } | { x?: undefined; y: string; z?: undefined; } | { x?: undefined; y?: undefined; z: null; }; }; }
+>{    outer: {        inner: Math.random() > 0.5 ? { x: 1 } : Math.random() > 0.5 ? { y: "s" } : { z: null },    },} : { outer: { inner: { x: number; } | { y: string; } | { z: null; }; }; }
+
+    outer: {
+>outer : { inner: { x: number; } | { y: string; } | { z: null; }; }
+>{        inner: Math.random() > 0.5 ? { x: 1 } : Math.random() > 0.5 ? { y: "s" } : { z: null },    } : { inner: { x: number; } | { y: string; } | { z: null; }; }
+
+        inner: Math.random() > 0.5 ? { x: 1 } : Math.random() > 0.5 ? { y: "s" } : { z: null },
+>inner : { x: number; } | { y: string; } | { z: null; }
+>Math.random() > 0.5 ? { x: 1 } : Math.random() > 0.5 ? { y: "s" } : { z: null } : { x: number; } | { y: string; } | { z: null; }
+>Math.random() > 0.5 : boolean
+>Math.random() : number
+>Math.random : () => number
+>Math : Math
+>random : () => number
+>0.5 : 0.5
+>{ x: 1 } : { x: number; }
+>x : number
+>1 : 1
+>Math.random() > 0.5 ? { y: "s" } : { z: null } : { y: string; } | { z: null; }
+>Math.random() > 0.5 : boolean
+>Math.random() : number
+>Math.random : () => number
+>Math : Math
+>random : () => number
+>0.5 : 0.5
+>{ y: "s" } : { y: string; }
+>y : string
+>"s" : "s"
+>{ z: null } : { z: null; }
+>z : null
+
+    },
+};
+
+export const list = [{ fast: true }, { retries: 3 }];
+>list : ({ fast: boolean; retries?: undefined; } | { fast?: undefined; retries: number; })[]
+>[{ fast: true }, { retries: 3 }] : ({ fast: boolean; } | { retries: number; })[]
+>{ fast: true } : { fast: boolean; }
+>fast : boolean
+>true : true
+>{ retries: 3 } : { retries: number; }
+>retries : number
+>3 : 3
+
+export function make(flag: boolean) {
+>make : (flag: boolean) => { mode: { fast: boolean; retries?: undefined; } | { fast?: undefined; retries: number; }; }
+>flag : boolean
+
+    return { mode: flag ? { fast: true } : { retries: 3 } };
+>{ mode: flag ? { fast: true } : { retries: 3 } } : { mode: { fast: boolean; } | { retries: number; }; }
+>mode : { fast: boolean; } | { retries: number; }
+>flag ? { fast: true } : { retries: 3 } : { fast: boolean; } | { retries: number; }
+>flag : boolean
+>{ fast: true } : { fast: boolean; }
+>fast : boolean
+>true : true
+>{ retries: 3 } : { retries: number; }
+>retries : number
+>3 : 3
+}
+
